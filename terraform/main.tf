@@ -68,15 +68,14 @@ resource "google_compute_instance" "webserver" {
     systemctl enable docker
     systemctl start docker 
     sudo mkfs.ext4 -m 0 -E lazy_itable_init=0,lazy_journal_init=0,discard /dev/sdb
-    sudo mkfs.ext4 /dev/sdb1
     sudo mkdir /web
-    echo UUID=$(sudo blkid -s UUID -o value /dev/sdb /web ext4 defaults 0 0 | sudo tee -a /etc/fstab
+    echo UUID=$(sudo blkid -s UUID -o value /dev/sdb) /web ext4 defaults 0 0 | sudo tee -a /etc/fstab
     sudo mount /web
     mkdir -p /web/gitlab/etc /web/build
-    cd /web/build &&\
-    git clone https://github.com/rgclapp007/terraform-docker-github.git build
+    cd /web &&\
+    git clone https://github.com/rgclapp007/terraform-docker-gitlab.git build
     gsutil cp ${var.config_path}/env /web/build/compose/.env
-    gsutil cp ${var.service_path}/cloud-key.json /web/gitlab/etc/key.json
+    gsutil cp ${var.service_path} /web/gitlab/etc/key.json
     cd /web/build/compose &&
     docker-compose  up -d
   EOT
