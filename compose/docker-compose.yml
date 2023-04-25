@@ -23,7 +23,7 @@ services:
             'provider' => 'Google',
             'region'=> "us-central1",
             'google_project' => '${PROJECT}',
-            'google_client_email' => '${SERVICE_ACCOUNT}'
+            'google_client_email' => '${SERVICE_ACCOUNT}',
             'google_json_key_location' => '/etc/gitlab/key.json'
         }
 
