@@ -67,6 +67,6 @@ Session.vim
 
 docker-compose.override.yml
 
-variables.tf
+terraform.tfvars
 
 .env

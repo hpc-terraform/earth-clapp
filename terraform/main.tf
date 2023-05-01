@@ -14,24 +14,21 @@ provider "google" {
 }
 
 resource "google_compute_disk" "web_disk" {
-  name = "web-disk"
+  name = "premonition-disk-data"
   size = 200
 }
 
-resource "google_compute_address" "static_ip" {
-  name = "webserver-static-ip"
-}
 
 
 resource "google_compute_instance" "webserver" {
   name         = var.webname
-  machine_type = "n1-standard-2"
+  machine_type = "n1-standard-4"
   zone         = var.zone
 
   boot_disk {
     initialize_params {
       image = "debian-cloud/debian-10"
-      size  = 20
+      size  = 30
     }
   }
 
@@ -43,7 +40,7 @@ resource "google_compute_instance" "webserver" {
     network = "default"
 
     access_config {
-      nat_ip = google_compute_address.static_ip.address
+      nat_ip = "34.105.90.29"
     }
   }
 

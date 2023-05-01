@@ -6,7 +6,7 @@ services:
     hostname: "${HOSTNAME}"
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'https://premonition.stanford.edu'
+        external_url 'https://${HOSTNAME}'
         letsencrypt['contact_emails'] = ['clapp@s
 tanford.edu']
         gitlab_rails['gitlab_email_enabled'] = true
